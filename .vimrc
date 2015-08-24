@@ -5,11 +5,11 @@ if has('vim_starting')
   endif
 
   " Required:
-  set runtimepath+=/home/dennis/.vim/bundle/neobundle.vim/
+  set runtimepath+=/Users/user/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('/home/dennis/.vim/bundle/neobundle.vim/'))
+call neobundle#begin(expand('/Users/user/.vim/bundle/neobundle.vim/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -22,13 +22,14 @@ NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'tpope/vim-rails.git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'edkolev/tmuxline.vim'
-NeoBundle 'mxw/vim-jsx'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'kien/rainbow_parentheses.vim'
 
@@ -49,6 +50,11 @@ set backspace=indent,eol,start
 set nowrap
 set autoread
 set history=1000
+set swapfile
+set dir=/tmp
+
+""" disable folding
+let g:vim_markdown_folding_disabled=1
 
 """ line numbers
 set number
@@ -83,6 +89,9 @@ let g:airline_exclude_preview = 1
 """ jsx specific
 let g:jsx_ext_required = 0
 
+""" vim-go
+let g:go_fmt_fail_silently = 1
+
 """ Indentations
 set autoindent
 set expandtab
@@ -99,5 +108,6 @@ imap kj <Esc>
 autocmd BufWritePre * :%s/\s\+$//e
 
 """ look
+set hlsearch
 set guifont=Inconsolata-dz\ for\ Powerline:h13
 let g:tmuxline_powerline_separators = 0
