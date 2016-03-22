@@ -23,6 +23,7 @@ NeoBundle 'mxw/vim-jsx'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'isRuslan/vim-es6'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mustache/vim-mustache-handlebars'
@@ -92,6 +93,10 @@ let g:jsx_ext_required = 0
 """ vim-go
 let g:go_fmt_fail_silently = 1
 
+""" splits open on bottom and right
+set splitbelow
+set splitright
+
 """ Indentations
 set autoindent
 set expandtab
@@ -103,6 +108,16 @@ set tabstop=2
 imap jj <Esc>
 imap jk <Esc>
 imap kj <Esc>
+nnoremap <F2> :set nonumber! <CR>
+
+""" Edit file in current low level directory
+nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
+
+""" vsp in current low level directory
+nnoremap <Leader>v :vsp <C-R>=expand('%:p:h') . '/'<CR>
+
+""" sp in current low level directory
+nnoremap <Leader>p :sp <C-R>=expand('%:p:h') . '/'<CR>
 
 """ Strip whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -111,3 +126,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 set hlsearch
 set guifont=Inconsolata-dz\ for\ Powerline:h13
 let g:tmuxline_powerline_separators = 0
+
+""" mappings
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/

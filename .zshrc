@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/user/.oh-my-zsh
+export PATH=$PATH:~/bin
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -56,6 +57,8 @@ export PATH=$PATH:$GOPATH/bin
 
 source $ZSH/oh-my-zsh.sh
 
+export PATH="$HOME/Library/Haskell/bin:$PATH"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -75,52 +78,20 @@ source $ZSH/oh-my-zsh.sh
 source ~/.profile
 eval "$(direnv hook zsh)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-
-alias bexec='bundle exec'
-
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias gp="git pull"
-alias gs="git status"
-alias gst="git status"
-alias gc="git commit -v"
-alias gd="git diff"
-alias ga="git add"
-alias gco="git checkout"
-alias gcom="git checkout master"
-alias gl="git log"
-
-alias move='mi && forego start'
-alias lab='cd ~/p/the_lab/'
-alias gowd='cd ~/go/src/github.com/shyshy'
-alias mid='cd ~/p/movableink_dev'
-alias oj='cd ~/p/movableink_dev/ojos'
-alias mi='cd ~/p/movableink_dev/movableink'
-alias canvas='cd ~/p/movableink_dev/canvas'
-alias dash='cd ~/p/movableink_dev/trillian'
-alias capt='cd ~/p/movableink_dev/capturama'
-alias learn='cd ~/p/learning'
-alias ck='cd ~/Desktop/codekata'
-alias mistart="mi;bin/rails server -p 3000 --bind 127.0.0.1"
-alias ojosstart="ojos;npm start"
-
-alias v='vim'
-alias m='mvim'
-alias t='tmux'
-
-alias zshrc='vim ~/.zshrc'
-alias vimrc='vim ~/.vimrc'
 #RVM Scripting
 
 # NVM
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+# Custom scripts
+export PATH=$PATH:~/bin
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
+# # ~/.extra can be used for settings you don't want to commit
+for file in ~/.{bashrc,extra,bash_prompt,exports,aliases,functions}; do
+        [ -r "$file" ] && source "$file"
+done
+
