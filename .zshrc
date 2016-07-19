@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/user/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 export PATH=$PATH:~/bin
 
 # Set name of the theme to load.
@@ -46,7 +46,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rails brew coffee)
+plugins=(git ruby rails coffee)
 
 # User configuration
 
@@ -75,14 +75,12 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-source ~/.profile
-eval "$(direnv hook zsh)"
+eval "$(zsh)"
 
 #RVM Scripting
 
 # NVM
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 
 # Custom scripts
 export PATH=$PATH:~/bin
@@ -91,7 +89,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # # ~/.extra can be used for settings you don't want to commit
-for file in ~/.{bashrc,extra,bash_prompt,exports,aliases,functions}; do
+for file in ~/.{extra,exports,aliases,functions}; do
         [ -r "$file" ] && source "$file"
 done
 
