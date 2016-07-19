@@ -1,50 +1,58 @@
-"Bundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=/Users/user/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-call neobundle#begin(expand('/Users/user/.vim/bundle/neobundle.vim/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'isRuslan/vim-es6'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'tpope/vim-rails.git'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'edkolev/tmuxline.vim'
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'kien/rainbow_parentheses.vim'
+set runtimepath^=~/.dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call neobundle#end()
+call dein#begin(expand('~/.dein'))
+
+" Let dein manage dein
+" Required:
+call dein#add('Shougo/dein.vim')
+
+" Add or remove your plugins here:
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('tpope/vim-fugitive')
+call dein#add('scrooloose/syntastic')
+call dein#add('flazz/vim-colorschemes')
+call dein#add('mxw/vim-jsx')
+call dein#add('pangloss/vim-javascript')
+call dein#add('vim-ruby/vim-ruby')
+call dein#add('fatih/vim-go')
+call dein#add('isRuslan/vim-es6')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('kchmck/vim-coffee-script')
+call dein#add('mustache/vim-mustache-handlebars')
+call dein#add('tpope/vim-rails.git')
+call dein#add('tpope/vim-surround')
+call dein#add('bling/vim-airline')
+call dein#add('edkolev/tmuxline.vim')
+call dein#add('christoomey/vim-tmux-navigator')
+call dein#add('kien/rainbow_parentheses.vim')
+
+" You can specify revision/branch/tag.
+call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+" Required:
+call dein#end()
+
+" Required:
+filetype plugin indent on
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 " Required:
 syntax on
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
 
 """ general things
 set backspace=indent,eol,start
@@ -71,6 +79,7 @@ set wildmode=list:longest,full
 
 """ syntastic
 let g:syntastic_disabled_filetypes = ['scss', 'sass', 'hbs', 'handlebars.html']
+let g:syntastic_javascript_checkers = ['eslint']
 
 """ statuslines
 set laststatus=2
@@ -87,8 +96,8 @@ let g:airline#extensions#tabline#right_alt_sep='|'
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_exclude_preview = 1
 
-""" jsx specific
-let g:jsx_ext_required = 0
+""" jsx specific - uncomment when working with jsx
+""" let g:jsx_ext_required = 0
 
 """ vim-go
 let g:go_fmt_fail_silently = 1
@@ -108,7 +117,10 @@ set tabstop=2
 imap jj <Esc>
 imap jk <Esc>
 imap kj <Esc>
+
 nnoremap <F2> :set nonumber! <CR>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+noremap <space> :
 
 """ Edit file in current low level directory
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
@@ -126,6 +138,3 @@ autocmd BufWritePre * :%s/\s\+$//e
 set hlsearch
 set guifont=Inconsolata-dz\ for\ Powerline:h13
 let g:tmuxline_powerline_separators = 0
-
-""" mappings
-:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
