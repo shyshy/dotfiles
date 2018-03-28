@@ -46,7 +46,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rails coffee)
+plugins=(git ruby rails brew coffee)
 
 # User configuration
 
@@ -75,12 +75,17 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-eval "$(zsh)"
+source ~/.profile
+eval "$(direnv hook zsh)"
 
 #RVM Scripting
 
 # NVM
 export NVM_DIR=~/.nvm
+source '/usr/local/opt/nvm/nvm.sh'
+
+# yarn
+export PATH="$PATH:`yarn global bin`"
 
 # Custom scripts
 export PATH=$PATH:~/bin
@@ -89,7 +94,29 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # # ~/.extra can be used for settings you don't want to commit
-for file in ~/.{extra,exports,aliases,functions}; do
+for file in ~/.{bashrc,extra,bash_prompt,exports,aliases,functions}; do
         [ -r "$file" ] && source "$file"
 done
 
+# common tmux aliases
+alias tns='tmux -2 new -s'
+alias tas='tmux attach -t'
+alias ts='tmux switch -t'
+alias tls='tmux list-sessions'
+
+# added by travis gem
+[ -f /Users/user/.travis/travis.sh ] && source /Users/user/.travis/travis.sh
+export PATH="/usr/local/opt/qt/bin:$PATH"
+
+export MI_ENV=development
+export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh
+
+# lunchy
+LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
+if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
+  . $LUNCHY_DIR/lunchy-completion.zsh
+fi
