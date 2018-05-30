@@ -134,8 +134,10 @@ let g:tmuxline_powerline_separators = 0
 " gsub string that's under cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
+" Remap space to leader, recursive so
+let mapleader=" "
 " space to unhighlight searches
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
+nmap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 
 imap jj <Esc>
 imap jk <Esc>
@@ -146,15 +148,16 @@ nnoremap ,s :w<CR>
 nnoremap ,q :wq<CR>
 nnoremap ,gs :Gstatus<CR>
 
-" edit file in current low level directory
+" edit file in current level directory
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 
-" vsp in current low level directory
+" vsp in current level directory
 nnoremap <Leader>v :vsp <C-R>=expand('%:p:h') . '/'<CR>
 
-" sp in current low level directory
+" sp in current level directory
 nnoremap <Leader>p :sp <C-R>=expand('%:p:h') . '/'<CR>
 
+" yank paste
 noremap <Leader>c "*y
 
 " }}} mappings
@@ -187,3 +190,8 @@ let g:rspec_runner = "os_x_iterm"
 let g:rspec_command = "!rspec --format documentation {spec}"
 map <Leader>n :call RunNearestSpec()<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
+
+" ale lint
+let g:ale_linters = {
+      \  'ruby': []
+      \}

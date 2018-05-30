@@ -46,10 +46,11 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rails brew coffee)
+plugins=(git ruby rails brew)
 
 # User configuration
-
+# python specific
+export PATH=/Users/user/Library/Python/3.6/bin:/usr/local/opt/python/libexec/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
@@ -57,7 +58,8 @@ export PATH=$PATH:$GOPATH/bin
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="$HOME/Library/Haskell/bin:$PATH"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -75,22 +77,10 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-source ~/.profile
 eval "$(direnv hook zsh)"
-
-#RVM Scripting
-
-# NVM
-export NVM_DIR=~/.nvm
-source '/usr/local/opt/nvm/nvm.sh'
 
 # yarn
 export PATH="$PATH:`yarn global bin`"
-
-# Custom scripts
-export PATH=$PATH:~/bin
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # # ~/.extra can be used for settings you don't want to commit
@@ -111,12 +101,12 @@ export PATH="/usr/local/opt/qt/bin:$PATH"
 export MI_ENV=development
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh
-
 # lunchy
 LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
 if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
   . $LUNCHY_DIR/lunchy-completion.zsh
 fi
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh
