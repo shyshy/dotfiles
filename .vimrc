@@ -4,10 +4,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/user/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/Users/dshy/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('/Users/user/dein')
+call dein#begin('/Users/dshy/.cache/dein')
 
 " Let dein manage dein
 " Required:
@@ -23,28 +23,26 @@ call dein#add('isRuslan/vim-es6')
 call dein#add('vim-ruby/vim-ruby')
 call dein#add('w0rp/ale')
 call dein#add('sunaku/vim-ruby-minitest')
-call dein#add('fatih/vim-go')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('kchmck/vim-coffee-script')
 call dein#add('mustache/vim-mustache-handlebars')
+call dein#add('sheerun/vim-polyglot')
+call dein#add('fatih/vim-go')
 call dein#add('tpope/vim-rails.git')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-projectionist')
 call dein#add('bling/vim-airline')
-call dein#add('prettier/vim-prettier')
 call dein#add('edkolev/tmuxline.vim')
 call dein#add('christoomey/vim-tmux-navigator')
 call dein#add('kien/rainbow_parentheses.vim')
-call dein#add('leafgarland/typescript-vim')
 call dein#add('vimwiki/vimwiki')
 call dein#add('chemzqm/macdown.vim')
 call dein#add('AndrewRadev/ember_tools.vim')
-call dein#add('easymotion/vim-easymotion')
 call dein#add('rust-lang/rust.vim')
 call dein#add('thoughtbot/vim-rspec')
 
 " You can specify revision/branch/tag.
-call dein#add('Shougo/vimshell', { 'rev': 'd0c5bef' })
+" call dein#add('Shougo/deol.nvim', { 'rev': 'd0c5bef' })
 
 " Required:
 call dein#end()
@@ -73,6 +71,8 @@ set mouse=a
 """ searching
 set ignorecase " disregard case when searching
 set smartcase  " with ignorecase _enabled_ match the case if an upper case character is searched for!
+set hlsearch
+set incsearch
 
 """ disable folding
 let g:vim_markdown_folding_disabled=1
@@ -125,17 +125,16 @@ set tabstop=2
 autocmd BufWritePre * :%s/\s\+$//e
 
 """ look
-set hlsearch
-set incsearch
 set guifont=Inconsolata-dz\ for\ Powerline:h13
 let g:tmuxline_powerline_separators = 0
+
+" Remap space to leader, recursive so
+let mapleader=" "
 
 " {{{ mappings
 " gsub string that's under cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
-" Remap space to leader, recursive so
-let mapleader=" "
 " space to unhighlight searches
 nmap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 
@@ -146,7 +145,6 @@ imap kj <Esc>
 nnoremap <F2> :set nonumber! <CR>
 nnoremap ,s :w<CR>
 nnoremap ,q :wq<CR>
-nnoremap ,gs :Gstatus<CR>
 
 " edit file in current level directory
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
@@ -162,36 +160,14 @@ noremap <Leader>c "*y
 
 " }}} mappings
 
-" {{{ easymotion stuff
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-" }}} end easy motion
-"
-
-" Insert date
-command Date r! date "+\%m/\%d/\%Y"
-
 " vim-rspec
 let g:rspec_runner = "os_x_iterm"
-let g:rspec_command = "!rspec --format documentation {spec}"
+let g:rspec_command = "!bundle exec rspec --format documentation {spec}"
 map <Leader>n :call RunNearestSpec()<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 
-" ale lint
-let g:ale_linters = {
-      \  'ruby': []
-      \}
+" let g:ale_linters = { 'handlebars': ['ember-template-lint'] }
+let g:ale_fixers = { 'javascript': ['prettier'] }
+" let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
