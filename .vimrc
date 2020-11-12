@@ -33,13 +33,14 @@ call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-projectionist')
 call dein#add('bling/vim-airline')
 call dein#add('edkolev/tmuxline.vim')
-call dein#add('christoomey/vim-tmux-navigator')
 call dein#add('kien/rainbow_parentheses.vim')
 call dein#add('vimwiki/vimwiki')
 call dein#add('chemzqm/macdown.vim')
 call dein#add('AndrewRadev/ember_tools.vim')
 call dein#add('rust-lang/rust.vim')
 call dein#add('thoughtbot/vim-rspec')
+call dein#add('christoomey/vim-tmux-navigator')
+" call dein#add('ruby-formatter/rufo-vim')
 
 " You can specify revision/branch/tag.
 " call dein#add('Shougo/deol.nvim', { 'rev': 'd0c5bef' })
@@ -67,6 +68,7 @@ set swapfile
 set dir=/tmp
 set scrolloff=6
 set mouse=a
+set nofixeol
 
 """ searching
 set ignorecase " disregard case when searching
@@ -78,7 +80,13 @@ set incsearch
 let g:vim_markdown_folding_disabled=1
 
 """ line numbers
-set number
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 """ colors
 set t_Co=256
@@ -138,10 +146,6 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " space to unhighlight searches
 nmap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 
-imap jj <Esc>
-imap jk <Esc>
-imap kj <Esc>
-
 nnoremap <F2> :set nonumber! <CR>
 nnoremap ,s :w<CR>
 nnoremap ,q :wq<CR>
@@ -166,8 +170,9 @@ let g:rspec_command = "!bundle exec rspec --format documentation {spec}"
 map <Leader>n :call RunNearestSpec()<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 
-" let g:ale_linters = { 'handlebars': ['ember-template-lint'] }
-let g:ale_fixers = { 'javascript': ['prettier'] }
+" auto formatters
+let g:ale_linters = { 'go': ['gobuild'] } " go vet is broken: errors don't appear in buffer, use gobuild and let default compiler show errors
+let g:ale_fixers = { 'handlebars': ['prettier'], 'javascript': ['prettier'], 'ruby': ['rubocop'], 'typescript': ['prettier'] }
 " let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'

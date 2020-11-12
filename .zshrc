@@ -96,17 +96,17 @@ alias tls='tmux list-sessions'
 
 # added by travis gem
 [ -f /Users/user/.travis/travis.sh ] && source /Users/user/.travis/travis.sh
+
 export PATH="/usr/local/opt/qt/bin:$PATH"
 
-export MI_ENV=development
+export NODE_ENV=development
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
+
+# rubocop-daemon
+export PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
 
 # lunchy
 LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
 if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
   . $LUNCHY_DIR/lunchy-completion.zsh
 fi
-
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/user/p/movableink/khepri/node_modules/tabtab/.completions/electron-forge.zsh
