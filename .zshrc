@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export PATH=$PATH:~/bin
@@ -6,7 +13,7 @@ export PATH=$PATH:~/bin
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="avit"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,10 +56,12 @@ ZSH_THEME="avit"
 plugins=(git ruby rails brew)
 
 # User configuration
-# python specific
 export PATH=/Users/user/Library/Python/3.6/bin:/usr/local/opt/python/libexec/bin:$PATH
+
+# Go specific
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export GOPRIVATE=github.com/movableink
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -99,6 +108,7 @@ alias tls='tmux list-sessions'
 
 export PATH="/usr/local/opt/qt/bin:$PATH"
 
+export MI_ENV=development
 export NODE_ENV=development
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
 
@@ -110,3 +120,6 @@ LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
 if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
   . $LUNCHY_DIR/lunchy-completion.zsh
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

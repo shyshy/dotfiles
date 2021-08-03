@@ -21,7 +21,7 @@ call dein#add('tpope/vim-rake')
 call dein#add('flazz/vim-colorschemes')
 call dein#add('isRuslan/vim-es6')
 call dein#add('vim-ruby/vim-ruby')
-call dein#add('w0rp/ale')
+call dein#add('dense-analysis/ale')
 call dein#add('sunaku/vim-ruby-minitest')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('kchmck/vim-coffee-script')
@@ -172,7 +172,7 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 
 " auto formatters
 let g:ale_linters = { 'go': ['gobuild'] } " go vet is broken: errors don't appear in buffer, use gobuild and let default compiler show errors
-let g:ale_fixers = { 'handlebars': ['prettier'], 'javascript': ['prettier'], 'ruby': ['rubocop'], 'typescript': ['prettier'] }
-" let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fixers = { 'mustache': ['prettier'], 'javascript': ['prettier'], 'ruby': ['rubocop'], 'typescript': ['prettier'] }
+let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
