@@ -45,6 +45,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
+# History Settings
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -62,13 +65,11 @@ export PATH=/Users/user/Library/Python/3.6/bin:/usr/local/opt/python/libexec/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GOPRIVATE=github.com/movableink
+export GO111MODULE=on
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -115,11 +116,7 @@ export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
 # rubocop-daemon
 export PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
 
-# lunchy
-LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
-if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
-  . $LUNCHY_DIR/lunchy-completion.zsh
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+. /usr/local/opt/asdf/libexec/asdf.sh

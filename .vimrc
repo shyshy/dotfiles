@@ -1,30 +1,32 @@
-" dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+" Ward off unexpected things that your distro might have made, as
+" well as sanely reset options when re-sourcing .vimrc
+set nocompatible
 
-" Required:
-set runtimepath+=/Users/dshy/.cache/dein/repos/github.com/Shougo/dein.vim
+" Set Dein base path (required)
+let s:dein_base = '/Users/dshy/.cache/dein'
 
-" Required:
-call dein#begin('/Users/dshy/.cache/dein')
+" Set Dein source path (required)
+let s:dein_src = '/Users/dshy/.cache/dein/repos/github.com/Shougo/dein.vim'
 
-" Let dein manage dein
-" Required:
-call dein#add('Shougo/dein.vim')
+" Set Dein runtime path (required)
+execute 'set runtimepath+=' . s:dein_src
 
-" Add or remove your plugins here:
+" Call Dein initialization (required)
+call dein#begin(s:dein_base)
+
+call dein#add(s:dein_src)
+
+" Your plugins go here:
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-rake')
 call dein#add('flazz/vim-colorschemes')
-call dein#add('isRuslan/vim-es6')
 call dein#add('vim-ruby/vim-ruby')
 call dein#add('dense-analysis/ale')
 call dein#add('sunaku/vim-ruby-minitest')
-call dein#add('plasticboy/vim-markdown')
-call dein#add('kchmck/vim-coffee-script')
+call dein#add('godlygeek/tabular')
+call dein#add('preservim/vim-markdown')
 call dein#add('mustache/vim-mustache-handlebars')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('fatih/vim-go')
@@ -34,29 +36,37 @@ call dein#add('tpope/vim-projectionist')
 call dein#add('bling/vim-airline')
 call dein#add('edkolev/tmuxline.vim')
 call dein#add('kien/rainbow_parentheses.vim')
-call dein#add('vimwiki/vimwiki')
-call dein#add('chemzqm/macdown.vim')
-call dein#add('AndrewRadev/ember_tools.vim')
+" call dein#add('vimwiki/vimwiki') this conflicts with copilot and vim-markdown
 call dein#add('rust-lang/rust.vim')
-call dein#add('thoughtbot/vim-rspec')
+call dein#add('vim-test/vim-test')
 call dein#add('christoomey/vim-tmux-navigator')
-" call dein#add('ruby-formatter/rufo-vim')
+call dein#add('ruanyl/vim-gh-line')
+call dein#add('ruby-formatter/rufo-vim')
+call dein#add('github/copilot.vim')
 
-" You can specify revision/branch/tag.
-" call dein#add('Shougo/deol.nvim', { 'rev': 'd0c5bef' })
-
-" Required:
+" Finish Dein initialization (required)
 call dein#end()
 
-" Required:
-filetype plugin indent on
-syntax enable
+" comment these in whenever you update plugins from above
+" call map(dein#check_clean(), "delete(v:val, 'rf')")
+" call dein#recache_runtimepath()
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
+" Attempt to determine the type of a file based on its name and possibly its
+" contents. Use this to allow intelligent auto-indenting for each filetype,
+" and for plugins that are filetype specific.
+if has('filetype')
+  filetype indent plugin on
 endif
-"End dein Scripts-------------------------
+
+" Enable syntax highlighting
+if has('syntax')
+  syntax on
+endif
+
+" Uncomment if you want to install not-installed plugins on startup.
+if dein#check_install()
+ call dein#install()
+endif
 
 """ general things
 set backspace=indent,eol,start
@@ -164,11 +174,14 @@ noremap <Leader>c "*y
 
 " }}} mappings
 
-" vim-rspec
-let g:rspec_runner = "os_x_iterm"
-let g:rspec_command = "!bundle exec rspec --format documentation {spec}"
-map <Leader>n :call RunNearestSpec()<CR>
-map <Leader>t :call RunCurrentSpecFile()<CR>
+" vim-test
+nmap <silent> <leader>n :TestNearest<CR>
+nmap <silent> <leader>t :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+" don't use bin/rspec, always use bundle exec
+let test#ruby#use_binstubs = 0
 
 " auto formatters
 let g:ale_linters = { 'go': ['gobuild'] } " go vet is broken: errors don't appear in buffer, use gobuild and let default compiler show errors
@@ -176,3 +189,6 @@ let g:ale_fixers = { 'mustache': ['prettier'], 'javascript': ['prettier'], 'ruby
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
+
+" copilot
+let g:copilot_filetypes = {'markdown': v:true}
