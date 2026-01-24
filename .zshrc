@@ -140,6 +140,7 @@ alias vim='nvim'
 # specific to Arch
 alias pacman='sudo pacman'
 alias hyprconf='vim ~/.config/hypr/hyprland.conf'
+# . "$HOME/.local/bin/env"
 
 # common git
 alias gs='git status'
@@ -154,7 +155,6 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
-. "$HOME/.local/bin/env"
 
 # Setup starship
 eval "$(starship init zsh)"
