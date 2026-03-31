@@ -5,6 +5,3 @@
 # Generated/binary files
 **/lazy-lock.json
 **/vim-zellij-navigator.wasm
-
-# Stow internal
-.stow-local-ignore
