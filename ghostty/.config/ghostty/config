@@ -1,0 +1,6 @@
+theme = Catppuccin Macchiato
+font-family = Droid Sans Mono
+font-thicken = true
+
+window-padding-x = 10
+window-padding-y = 10
