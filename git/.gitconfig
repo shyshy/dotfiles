@@ -1,0 +1,4 @@
+[core]
+  editor = nvim -f
+[include]
+  path = ~/.gitconfig.local
