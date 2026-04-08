@@ -1,5 +1,12 @@
+env {
+  EDITOR "nvim"
+}
+
 keybinds clear-defaults=true {
     locked {
+        unbind "Alt f"
+        bind "Alt F" {  ToggleFloatingPanes; }
+
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Ctrl h" {
             MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {

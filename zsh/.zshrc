@@ -131,6 +131,8 @@ unset key
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export EDITOR="nvim"
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias zshrc='vim ~/.zshrc'
@@ -143,6 +145,7 @@ alias ber='bundle exec rspec'
 alias gs='git status'
 alias gc='git commit'
 alias gd='git diff'
+alias ga='git add'
 
 # tmux
 alias t='tmux -2'
