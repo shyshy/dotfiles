@@ -2,3 +2,5 @@
   editor = nvim -f
 [include]
   path = ~/.gitconfig.local
+[commit]
+	verbose = true
