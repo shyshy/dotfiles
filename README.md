@@ -12,6 +12,7 @@ Personal configuration files managed with [GNU Stow](https://www.gnu.org/softwar
 | [ghostty](https://ghostty.org/) | Terminal emulator |
 | [starship](https://starship.rs/) | Shell prompt |
 | [git](https://git-scm.com/) | Version control config |
+| scripts | Reusable shell scripts (bookmarks, etc.) |
 
 ## Prerequisites
 
@@ -34,7 +35,7 @@ Clone and stow:
 ```bash
 git clone https://github.com/<you>/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow zsh nvim zellij ghostty git
+stow zsh nvim zellij ghostty git scripts
 ```
 
 This creates symlinks from your home directory into the repo. For example, `stow zsh` symlinks `~/dotfiles/zsh/.zshrc` to `~/.zshrc`.
@@ -53,6 +54,24 @@ If config files already exist as real files (not symlinks), remove or back them 
 # back up, then stow
 mv ~/.zshrc ~/.zshrc.bak
 stow zsh
+```
+
+## Scripts
+
+The `scripts` stow package installs reusable shell functions to `~/.local/scripts/`. All `.zsh` files in that directory are auto-sourced by `.zshrc`.
+
+To add a new script, create a `.zsh` file in `scripts/.local/scripts/` and re-stow.
+
+### Directory bookmarks
+
+Quickly save and jump to directories from anywhere:
+
+```bash
+mark proj        # bookmark current directory as "proj"
+jump proj        # cd to it (or: j proj)
+cd ~proj         # also works via zsh named directories
+marks            # list all bookmarks
+unmark proj      # remove a bookmark
 ```
 
 ## Post-install setup

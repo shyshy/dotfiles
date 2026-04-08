@@ -164,5 +164,10 @@ bindkey "^[[B" down-line-or-beginning-search
 # Setup starship
 eval "$(starship init zsh)"
 
+# Source all scripts from ~/.local/scripts
+for script in ~/.local/scripts/*.zsh(N); do
+  source "$script"
+done
+
 # Machine-specific config (OS aliases, work env, secrets, PATH overrides)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
