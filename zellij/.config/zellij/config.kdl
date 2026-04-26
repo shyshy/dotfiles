@@ -7,6 +7,9 @@ keybinds clear-defaults=true {
         unbind "Alt f"
         bind "Alt F" {  ToggleFloatingPanes; }
 
+        bind "Alt ]" { GoToNextTab; }
+        bind "Alt [" { GoToPreviousTab; }
+
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Ctrl h" {
             MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
