@@ -5,3 +5,8 @@
 # Generated/binary files
 **/lazy-lock.json
 **/vim-zellij-navigator.wasm
+
+# XDG dirs that tools install into — don't let stow tree-folding pull them in
+scripts/.local/bin/
+scripts/.local/share/
+scripts/.local/state/

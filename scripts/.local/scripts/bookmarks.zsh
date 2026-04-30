@@ -1,6 +1,6 @@
 # bookmarks.zsh — directory bookmarking for fast navigation
 #
-# mark <name>        Save current directory as a bookmark
+# mark [-f] <name>   Save current directory as a bookmark
 # jump <name>        cd to a bookmarked directory (aliased as j)
 # marks              List all bookmarks
 # unmark <name>      Remove a bookmark
@@ -19,18 +19,38 @@ _bookmarks_load() {
 _bookmarks_load
 
 mark() {
+  local force=0
+  while [[ "$1" == -* ]]; do
+    case "$1" in
+      -f|--force) force=1; shift ;;
+      --) shift; break ;;
+      -*) echo "Unknown flag: $1"; echo "Usage: mark [-f|--force] <name>"; return 1 ;;
+    esac
+  done
+
   if [[ -z "$1" ]]; then
-    echo "Usage: mark <name>"
+    echo "Usage: mark [-f|--force] <name>"
     return 1
   fi
+
+  local name="$1"
+
+  if (( ! force )) && grep -q "^$name=" "$BOOKMARKS_FILE" 2>/dev/null; then
+    local existing_dir
+    existing_dir=$(grep "^$name=" "$BOOKMARKS_FILE" | head -1 | cut -d= -f2-)
+    echo "Warning: bookmark '$name' already points to: $existing_dir"
+    echo "Re-run with -f/--force to overwrite."
+    return 1
+  fi
+
   # Remove existing entry for this name, then append
   if [[ -f "$BOOKMARKS_FILE" ]]; then
-    local tmp=$(grep -v "^$1=" "$BOOKMARKS_FILE")
+    local tmp=$(grep -v "^$name=" "$BOOKMARKS_FILE")
     printf '%s\n' "$tmp" > "$BOOKMARKS_FILE"
   fi
-  echo "$1=$PWD" >> "$BOOKMARKS_FILE"
-  hash -d "$1"="$PWD"
-  echo "Bookmarked: ~$1 → $PWD"
+  echo "$name=$PWD" >> "$BOOKMARKS_FILE"
+  hash -d "$name"="$PWD"
+  echo "Bookmarked: ~$name → $PWD"
 }
 
 jump() {
