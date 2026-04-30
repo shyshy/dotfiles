@@ -171,3 +171,5 @@ done
 
 # Machine-specific config (OS aliases, work env, secrets, PATH overrides)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+[ -f ~/.gusto/init.sh ] && source ~/.gusto/init.sh
