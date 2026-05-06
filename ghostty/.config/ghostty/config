@@ -4,3 +4,7 @@ font-thicken = true
 
 window-padding-x = 10
 window-padding-y = 10
+
+# auto jump
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1

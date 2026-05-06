@@ -7,8 +7,8 @@ keybinds clear-defaults=true {
         unbind "Alt f"
         bind "Alt F" {  ToggleFloatingPanes; }
 
-        bind "Alt ]" { GoToNextTab; }
-        bind "Alt [" { GoToPreviousTab; }
+        bind "Alt i" { GoToNextTab; }
+        bind "Alt u" { GoToPreviousTab; }
 
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Ctrl h" {

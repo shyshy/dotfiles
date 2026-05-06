@@ -35,6 +35,11 @@ mark() {
 
   local name="$1"
 
+  if [[ "$name" == */* || "$name" == *=* || "$name" == *[[:space:]]* ]]; then
+    echo "Invalid bookmark name: '$name' (no /, =, or whitespace)"
+    return 1
+  fi
+
   if (( ! force )) && grep -q "^$name=" "$BOOKMARKS_FILE" 2>/dev/null; then
     local existing_dir
     existing_dir=$(grep "^$name=" "$BOOKMARKS_FILE" | head -1 | cut -d= -f2-)
