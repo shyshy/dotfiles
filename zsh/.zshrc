@@ -146,6 +146,9 @@ alias gs='git status'
 alias gc='git commit'
 alias gd='git diff'
 alias ga='git add'
+alias gco='git checkout'
+alias gcom='git checkout main'
+alias gp='git pull'
 
 # tmux
 alias t='tmux -2'
